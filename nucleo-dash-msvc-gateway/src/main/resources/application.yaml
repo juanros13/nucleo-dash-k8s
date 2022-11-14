@@ -1,0 +1,56 @@
+app:
+  config:
+    keycloak:
+      url: https://auth.nucleo.rocks/
+      realm: nucleo-dash-realm
+      client-secret: p9ECGTWo2VrbmhzBVBdnoEdadt8P6vCE
+      client-id: nucleo-dash-back-client
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: nucleo-dash-msvc-user
+          uri: lb://nucleo-dash-msvc-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            authorization-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/auth
+            jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
+            token-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/token
+            user-info-authentication-method: header
+            user-info-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+        registration:
+          nucleo-dash-back-client:
+            authorization-grant-type: authorization_code
+            client-id: ${app.config.keycloak.client-id}
+            client-secret: ${app.config.keycloak.client-secret}
+            provider: keycloak
+            redirect-uri: '{baseUrl}/login/oauth2/code/keycloak'
+            scope: openid
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
+
+# Enable these to debug the Authorization flow
+server:
+  port: 8090
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
