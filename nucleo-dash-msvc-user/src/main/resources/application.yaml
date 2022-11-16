@@ -4,7 +4,7 @@ app:
       server-url: https://auth.nucleo.rocks
       realm: nucleo-dash-realm
       clientId: admin-cli
-      client-secret: 6PA7fEn0poAvkXDPaKxcUIqOCHBv9u2m
+      client-secret: vTlGnoGISHDN5YXxYKVOhKq1cthjiqrt
       user: admin
       pass: admin
 

@@ -3,7 +3,7 @@ app:
     keycloak:
       url: https://auth.nucleo.rocks/
       realm: nucleo-dash-realm
-      client-secret: p9ECGTWo2VrbmhzBVBdnoEdadt8P6vCE
+      client-secret: vXvN6OwxF4NpEjEFYeizOssvfwD6cMTr
       client-id: nucleo-dash-back-client
 
 spring:
