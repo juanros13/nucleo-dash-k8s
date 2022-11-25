@@ -1,13 +1,21 @@
+config:
+  texto: "asdasd"
 app:
   config:
+    usuarios-url: http://localhost:8001
     keycloak:
       url: https://auth.nucleo.rocks/
       realm: nucleo-dash-realm
       client-secret: vXvN6OwxF4NpEjEFYeizOssvfwD6cMTr
       client-id: nucleo-dash-back-client
 
+
 spring:
   cloud:
+    kubernetes:
+      config:
+        enabled: false
+
     gateway:
       globalcors:
         corsConfigurations:
@@ -17,7 +25,7 @@ spring:
             allowedHeaders: "*"
       routes:
         - id: nucleo-dash-msvc-user
-          uri: lb://nucleo-dash-msvc-user
+          uri: ${app.config.usuarios-url}
           predicates:
             - Path=/user/**
           filters:
