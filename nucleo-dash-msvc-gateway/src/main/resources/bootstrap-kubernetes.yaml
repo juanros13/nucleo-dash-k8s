@@ -2,5 +2,5 @@ spring:
   cloud:
     kubernetes:
       config:
-        enabled: false
-      enabled: false
+        enabled: true
+      enabled: true

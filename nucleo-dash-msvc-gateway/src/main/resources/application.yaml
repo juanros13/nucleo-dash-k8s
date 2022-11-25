@@ -12,10 +12,6 @@ app:
 
 spring:
   cloud:
-    kubernetes:
-      config:
-        enabled: false
-
     gateway:
       globalcors:
         corsConfigurations:
