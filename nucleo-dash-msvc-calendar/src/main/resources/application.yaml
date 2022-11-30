@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: dash-google-calendar-server
+  profiles:
+    active: dev
+
+server:
+  port: 9001
+google:
+  secret:
+    key:
+      path: classpath:keys/client_secret_gd.json
+  oauth:
+    callback:
+      uri: http://localhost:9001/oauth
+
+  credentials:
+    folder:
+      path: file:C:\\Users\\juanros13\\Documents\\CODIGO\\credentials
