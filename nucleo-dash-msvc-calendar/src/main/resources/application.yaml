@@ -1,11 +1,4 @@
-spring:
-  application:
-    name: dash-google-calendar-server
-  profiles:
-    active: dev
 
-server:
-  port: 9001
 google:
   secret:
     key:

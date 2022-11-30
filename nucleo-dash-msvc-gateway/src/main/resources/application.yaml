@@ -3,6 +3,7 @@ config:
 app:
   config:
     usuarios-url: http://localhost:8001
+    calendar-url: http://localhost:8001
     keycloak:
       url: https://auth.nucleo.rocks/
       realm: nucleo-dash-realm
@@ -24,6 +25,12 @@ spring:
           uri: ${app.config.usuarios-url}
           predicates:
             - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: nucleo-dash-msvc-calendar
+          uri: ${app.config.calendar-url}
+          predicates:
+            - Path=/calendar/**
           filters:
             - StripPrefix=1
 
