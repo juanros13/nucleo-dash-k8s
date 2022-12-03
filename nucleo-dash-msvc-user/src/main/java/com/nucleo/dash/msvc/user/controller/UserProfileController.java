@@ -33,7 +33,7 @@ public class UserProfileController {
             @RequestHeader("X-Auth-Id") String authIdHeader,
             @RequestBody GoogleCalendarIdRequest idCalendar
     ) {
-
+        log.info(authIdHeader);
         UserEntity user =  userProfileService.saveIdCalendar(authIdHeader, idCalendar.getId());
         return ResponseEntity.ok(user);
     }

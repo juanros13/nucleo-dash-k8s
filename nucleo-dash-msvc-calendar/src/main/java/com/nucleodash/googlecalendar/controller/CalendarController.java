@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Slf4j
@@ -76,7 +77,9 @@ public class CalendarController {
             @RequestHeader("X-Auth-Id") String authIdHeader
     ) throws Exception{
         //obtener token desde front
-        String code = token.getToken();
+        String decodedCode = token.getToken();
+        String code = java.net.URLEncoder.encode(decodedCode, StandardCharsets.UTF_8.name());
+        log.info(code);
         String tokenCalendar = null;
         Map<String, Object> response = new HashMap<>();
         //Checar si teenemos el token guardado en db

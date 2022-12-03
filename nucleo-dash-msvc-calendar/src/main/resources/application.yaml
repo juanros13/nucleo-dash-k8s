@@ -5,8 +5,8 @@ google:
       path: classpath:keys/client_secret_gd.json
   oauth:
     callback:
-      uri: http://localhost:9001/oauth
+      uri: http://localhost:4200/calendar/authGoogle
 
   credentials:
     folder:
-      path: file:C:\\Users\\juanros13\\Documents\\CODIGO\\credentials
+      path: file:C:\\Users\\juanros13\\Documents\\CODIGO\\NUCLEO2.0\\credentials

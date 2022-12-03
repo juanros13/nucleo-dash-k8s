@@ -3,7 +3,7 @@ config:
 app:
   config:
     usuarios-url: http://localhost:8001
-    calendar-url: http://localhost:8001
+    calendar-url: http://localhost:9001
     keycloak:
       url: https://auth.nucleo.rocks/
       realm: nucleo-dash-realm
