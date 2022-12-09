@@ -23,7 +23,6 @@ public class CalendarEntity {
     @NotBlank
     private String color;
 
-    @NotBlank
     private Boolean visible;
 
     @NotBlank

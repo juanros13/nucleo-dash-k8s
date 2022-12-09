@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class Calendar {
 
-    @NotBlank
     private Long id;
 
     @NotBlank
@@ -18,7 +17,6 @@ public class Calendar {
     @NotBlank
     private String color;
 
-    @NotBlank
     private Boolean visible;
 
 }

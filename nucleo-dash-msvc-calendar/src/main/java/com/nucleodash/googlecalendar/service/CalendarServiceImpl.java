@@ -28,7 +28,7 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public Optional<Calendar> byId(Long id, String authId) {
-        return  calendarMapper.convertToDtoOptional(calendarRepository.findByIdAndAuthId(id, authId));
+        return  Optional.of(calendarMapper.convertToDto(calendarRepository.findByIdAndAuthId(id, authId)));
     }
 
     @Override
