@@ -10,7 +10,7 @@ public interface CalendarRepository extends JpaRepository<CalendarEntity, Long> 
 
     List<CalendarEntity> findByAuthId(String authId);
 
-    CalendarEntity findByIdAndAuthId(Long id, String authId);
+    Optional<CalendarEntity> findByIdAndAuthId(Long id, String authId);
 
 
 }

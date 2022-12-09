@@ -1,11 +1,13 @@
 package com.nucleodash.googlecalendar.service;
 
+import com.nucleodash.googlecalendar.exception.EntityNotFoundException;
 import com.nucleodash.googlecalendar.model.dto.Calendar;
 import com.nucleodash.googlecalendar.model.entity.CalendarEntity;
 import com.nucleodash.googlecalendar.model.mapper.CalendarMapper;
 import com.nucleodash.googlecalendar.model.repository.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public Optional<Calendar> byId(Long id, String authId) {
-        return  Optional.of(calendarMapper.convertToDto(calendarRepository.findByIdAndAuthId(id, authId)));
+        return  Optional.of(calendarMapper.convertToDto(calendarRepository.findByIdAndAuthId(id, authId).orElseThrow(EntityNotFoundException::new)));
     }
 
     @Override
