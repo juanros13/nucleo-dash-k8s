@@ -38,9 +38,9 @@ import java.util.*;
 public class CalendarGoogleController {
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
 
-    private static HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+    private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-    private static JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
     private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);
 

@@ -30,7 +30,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BankingCoreRestClient bankingCoreRestClient;
 
-    private UserMapper userMapper = new UserMapper();
+    private final UserMapper userMapper = new UserMapper();
 
 
     public User resetPassword(String email) {

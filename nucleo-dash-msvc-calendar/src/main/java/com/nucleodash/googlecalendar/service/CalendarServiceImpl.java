@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class CalendarServiceImpl implements CalendarService{
 
-    private CalendarMapper calendarMapper = new CalendarMapper();
+    private final CalendarMapper calendarMapper = new CalendarMapper();
 
     @Autowired
     private CalendarRepository calendarRepository;

@@ -47,9 +47,9 @@ import java.util.Map;
 @Controller
 @Slf4j
 public class GoogleApiController {
-    private static HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+    private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-    private static JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
     private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);
 
