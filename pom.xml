@@ -19,6 +19,7 @@
         <module>nucleo-dash-msvc-user</module>
         <module>nucleo-dash-msvc-gateway</module>
         <module>nucleo-dash-msvc-calendar</module>
+        <module>nucleo-dash-msvc-followers</module>
     </modules>
 
     <properties>

@@ -28,7 +28,8 @@ public class SecurityConfiguration {
                             "/user/api/v1/user/recoverypassword",
                             "/user/api/v1/user/sendmailverify",
                             "/calendar/googlesignin",
-                            "/calendar"
+                            "/calendar",
+                            "/followers"
                     ).permitAll()
                     //ALL OTHER APIS ARE AUTHENTICATED
                     .anyExchange().authenticated()
