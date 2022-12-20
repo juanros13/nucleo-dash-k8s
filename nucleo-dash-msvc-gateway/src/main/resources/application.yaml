@@ -4,6 +4,7 @@ app:
   config:
     usuarios-url: http://localhost:8001
     calendar-url: http://localhost:9001
+    followers-url: http://localhost:9002
     keycloak:
       url: https://auth.nucleo.rocks/
       realm: nucleo-dash-realm
@@ -33,7 +34,12 @@ spring:
             - Path=/calendar/**
           filters:
             - StripPrefix=1
-
+        - id: nucleo-dash-msvc-followers
+          uri: ${app.config.followers-url}
+          predicates:
+            - Path=/followers/**
+          filters:
+            - StripPrefix=1
   security:
     oauth2:
       client:
