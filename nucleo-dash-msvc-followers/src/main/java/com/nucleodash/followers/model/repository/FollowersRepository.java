@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface FollowersRepository extends JpaRepository<FollowersEntity, Long> {
 
 
+    List<FollowersEntity> findByAuthId(String authId);
 
+    Optional<FollowersEntity> findByIdAndAuthId(Long id, String authId);
 
 }

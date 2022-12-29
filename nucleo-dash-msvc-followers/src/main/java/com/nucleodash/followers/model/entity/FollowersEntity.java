@@ -77,5 +77,8 @@ public class FollowersEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updated;
 
+    @NotBlank
+    private String authId;
+
 
 }

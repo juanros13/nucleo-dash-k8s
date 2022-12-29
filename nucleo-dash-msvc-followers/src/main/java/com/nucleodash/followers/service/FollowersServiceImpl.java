@@ -1,11 +1,14 @@
 package com.nucleodash.followers.service;
 
 
+import com.nucleodash.followers.model.dto.Followers;
 import com.nucleodash.followers.model.entity.FollowersEntity;
+import com.nucleodash.followers.model.mapper.FollowerMapper;
 import com.nucleodash.followers.model.repository.FollowersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,45 +20,24 @@ public class FollowersServiceImpl implements FollowersService {
     @Autowired
     private FollowersRepository followersRepository;
 
+    private final FollowerMapper followerMapper = new FollowerMapper();
 
-    public FollowersEntity createFollower(FollowersEntity followers) {
 
-        FollowersEntity saveFollowers = new FollowersEntity();
-        saveFollowers.setNombres(followers.getNombres());
-        saveFollowers.setApellidoMaterno(followers.getApellidoMaterno());
-        saveFollowers.setApellidoPaterno(followers.getApellidoPaterno());
-        saveFollowers.setEmail(followers.getEmail());
-        saveFollowers.setCelular(followers.getCelular());
-        saveFollowers.setCurp(followers.getCurp());
-        saveFollowers.setSexo(followers.getSexo());
-        saveFollowers.setEstadoCivil(followers.getEstadoCivil());
-        saveFollowers.setFechaNacimiento(followers.getFechaNacimiento());
-        saveFollowers.setIne(followers.getIne());
-        saveFollowers.setResidenciaCalle(followers.getResidenciaCalle());
-        saveFollowers.setResidenciaCp(followers.getResidenciaCp());
-        saveFollowers.setResidenciaColonia(followers.getResidenciaColonia());
-        saveFollowers.setNacimientoEntidadId(followers.getNacimientoEntidadId());
-        saveFollowers.setResidenciaMunicipioId(followers.getResidenciaMunicipioId());
-        saveFollowers.setResidenciaEntidadId(followers.getResidenciaEntidadId());
-        saveFollowers.setResidenciaNumeroExterior(followers.getResidenciaNumeroExterior());
-        saveFollowers.setResidenciaNumeroInterior(followers.getResidenciaNumeroInterior());
-        saveFollowers.setRolFamiliar(followers.getRolFamiliar());
-        saveFollowers.setStatus(1);
 
-    return followersRepository.save(saveFollowers);
+    public Followers save(Followers followers, String authId) {
+
+        FollowersEntity followersEntity = followerMapper.convertToEntity(followers, authId);
+        followersEntity.setAuthId(authId);
+        return followerMapper.convertToDto(followersRepository.save(followersEntity));
 
     }
 
     @Override
-    public Optional<FollowersEntity> byId(Long id) {
-        return  followersRepository.findById(id);
+    public Optional<Followers> byId(Long id, String authId) {
+        return  Optional.of(followerMapper.convertToDto(followersRepository.findByIdAndAuthId(id, authId).orElseThrow(EntityNotFoundException::new)));
     }
 
 
-    @Override
-    public FollowersEntity save(FollowersEntity followersEntity) {
-        return followersRepository.save(followersEntity);
-    }
 
     @Override
     public void delete(Long id) {
@@ -63,8 +45,8 @@ public class FollowersServiceImpl implements FollowersService {
     }
 
     @Override
-    public List<FollowersEntity> list() {
-        return new ArrayList<>(followersRepository.findAll());
+    public List<Followers> list(String authId) {
+        return new ArrayList<>(followerMapper.convertToDto(followersRepository.findByAuthId(authId)));
     }
 
 }

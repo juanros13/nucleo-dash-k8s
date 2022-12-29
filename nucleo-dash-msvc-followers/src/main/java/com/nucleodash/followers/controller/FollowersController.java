@@ -27,63 +27,73 @@ public class FollowersController {
 
     @GetMapping
     public Map<String, Object> list(
+            @RequestHeader("X-Auth-Id") String authIdHeader
     ) {
         Map<String, Object> body = new HashMap<>();
-        body.put("followers", followersService.list());
+        body.put("followers", followersService.list(authIdHeader));
         return body;
     }
 
-    @PostMapping(value = "/register")
-    public ResponseEntity createFollower(@RequestBody FollowersEntity request) {
+    @PostMapping
+    public ResponseEntity create(
+            @Valid @RequestBody Followers request, BindingResult result,
+            @RequestHeader("X-Auth-Id") String authIdHeader
+    ) {
+        if (result.hasErrors()) {
+            return validar(result);
+        }
+
         log.info("Creating follower with {}", request.toString());
-        FollowersEntity followers =  followersService.createFollower(request);
+        Followers followers =  followersService.save(request, authIdHeader);
         return ResponseEntity.ok(followers);
     }
 
-    @PutMapping("/editFollower/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> editFollower(
-            @Valid @RequestBody FollowersEntity followersEntity, BindingResult result,
-            @PathVariable Long id
+            @Valid @RequestBody Followers follower, BindingResult result,
+            @PathVariable Long id,
+            @RequestHeader("X-Auth-Id") String authIdHeader
 
     ) {
         if (result.hasErrors()) {
             return validar(result);
         }
 
-        Optional<FollowersEntity> o = followersService.byId(id);
+        Optional<Followers> o = followersService.byId(id,authIdHeader);
         if (o.isPresent()) {
-            FollowersEntity followerDB = o.get();
+            Followers followerDB = o.get();
 
-            followerDB.setNombres(followersEntity.getNombres());
-            followerDB.setApellidoMaterno(followersEntity.getApellidoMaterno());
-            followerDB.setApellidoPaterno(followersEntity.getApellidoPaterno());
-            followerDB.setEmail(followersEntity.getEmail());
-            followerDB.setCelular(followersEntity.getCelular());
-            followerDB.setCurp(followersEntity.getCurp());
-            followerDB.setSexo(followersEntity.getSexo());
-            followerDB.setEstadoCivil(followersEntity.getEstadoCivil());
-            followerDB.setFechaNacimiento(followersEntity.getFechaNacimiento());
-            followerDB.setIne(followersEntity.getIne());
-            followerDB.setResidenciaCalle(followersEntity.getResidenciaCalle());
-            followerDB.setResidenciaCp(followersEntity.getResidenciaCp());
-            followerDB.setResidenciaColonia(followersEntity.getResidenciaColonia());
-            followerDB.setNacimientoEntidadId(followersEntity.getNacimientoEntidadId());
-            followerDB.setResidenciaMunicipioId(followersEntity.getResidenciaMunicipioId());
-            followerDB.setResidenciaEntidadId(followersEntity.getResidenciaEntidadId());
-            followerDB.setResidenciaNumeroExterior(followersEntity.getResidenciaNumeroExterior());
-            followerDB.setResidenciaNumeroInterior(followersEntity.getResidenciaNumeroInterior());
-            followerDB.setRolFamiliar(followersEntity.getRolFamiliar());
+            followerDB.setNombres(follower.getNombres());
+            followerDB.setApellidoMaterno(follower.getApellidoMaterno());
+            followerDB.setApellidoPaterno(follower.getApellidoPaterno());
+            followerDB.setEmail(follower.getEmail());
+            followerDB.setCelular(follower.getCelular());
+            followerDB.setCurp(follower.getCurp());
+            followerDB.setSexo(follower.getSexo());
+            followerDB.setEstadoCivil(follower.getEstadoCivil());
+            followerDB.setFechaNacimiento(follower.getFechaNacimiento());
+            followerDB.setIne(follower.getIne());
+            followerDB.setResidenciaCalle(follower.getResidenciaCalle());
+            followerDB.setResidenciaCp(follower.getResidenciaCp());
+            followerDB.setResidenciaColonia(follower.getResidenciaColonia());
+            followerDB.setNacimientoEntidadId(follower.getNacimientoEntidadId());
+            followerDB.setResidenciaMunicipioId(follower.getResidenciaMunicipioId());
+            followerDB.setResidenciaEntidadId(follower.getResidenciaEntidadId());
+            followerDB.setResidenciaNumeroExterior(follower.getResidenciaNumeroExterior());
+            followerDB.setResidenciaNumeroInterior(follower.getResidenciaNumeroInterior());
+            followerDB.setRolFamiliar(follower.getRolFamiliar());
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(followersService.save(followerDB));
+            return ResponseEntity.status(HttpStatus.CREATED).body(followersService.save(followerDB,authIdHeader));
         }
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/deleteFollower/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteFollower(
-            @PathVariable Long id
+            @PathVariable Long id,
+            @RequestHeader("X-Auth-Id") String authIdHeader
     ) {
-        Optional<FollowersEntity> o = followersService.byId(id);
+        Optional<Followers> o = followersService.byId(id,authIdHeader);
         if (o.isPresent()) {
             followersService.delete(id);
             return ResponseEntity.noContent().build();
@@ -103,9 +113,10 @@ public class FollowersController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(
-            @PathVariable Long id
+            @PathVariable Long id,
+            @RequestHeader("X-Auth-Id") String authIdHeader
     ) {
-        Optional<FollowersEntity> followerOptional = followersService.byId(id);
+        Optional<Followers> followerOptional = followersService.byId(id,authIdHeader);
         if (followerOptional.isPresent()) {
             return ResponseEntity.ok(followerOptional.get());
         }
