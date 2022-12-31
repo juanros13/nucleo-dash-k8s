@@ -20,6 +20,7 @@
         <module>nucleo-dash-msvc-gateway</module>
         <module>nucleo-dash-msvc-calendar</module>
         <module>nucleo-dash-msvc-followers</module>
+        <module>nucleo-dash-msvc-geography</module>
     </modules>
 
     <properties>
