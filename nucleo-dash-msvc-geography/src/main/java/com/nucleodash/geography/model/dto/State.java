@@ -1,2 +1,4 @@
-package com.nucleodash.geography.model.dto;public class State {
+package com.nucleodash.geography.model.dto;
+
+public class State {
 }

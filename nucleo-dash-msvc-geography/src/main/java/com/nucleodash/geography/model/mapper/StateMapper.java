@@ -1,2 +1,4 @@
-package com.nucleodash.geography.model.mapper;public class StateMapper {
+package com.nucleodash.geography.model.mapper;
+
+public class StateMapper {
 }

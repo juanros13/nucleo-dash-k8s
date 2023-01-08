@@ -1,2 +1,4 @@
-package com.nucleodash.geography.service;public interface LocalitiesService {
+package com.nucleodash.geography.service;
+
+public interface LocalitiesService {
 }

@@ -1,4 +1,4 @@
 package com.nucleodash.geography.model.repository;
 
-public interface DederalDistrictRepository {
+public interface FederalDistrictRepository {
 }

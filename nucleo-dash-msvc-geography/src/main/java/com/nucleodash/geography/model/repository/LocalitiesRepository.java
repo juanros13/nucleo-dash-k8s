@@ -1,2 +1,4 @@
-package com.nucleodash.geography.model.repository;public class LocalitiesRepository {
+package com.nucleodash.geography.model.repository;
+
+public class LocalitiesRepository {
 }

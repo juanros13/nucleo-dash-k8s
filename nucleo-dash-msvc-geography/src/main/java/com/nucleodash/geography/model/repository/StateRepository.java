@@ -1,2 +1,4 @@
-package com.nucleodash.geography.model.repository;public interface StateRepository {
+package com.nucleodash.geography.model.repository;
+
+public interface StateRepository {
 }

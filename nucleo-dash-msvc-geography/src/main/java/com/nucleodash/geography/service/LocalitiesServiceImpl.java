@@ -1,2 +1,4 @@
-package com.nucleodash.geography.service;public class LocalitiesServiceImpl {
+package com.nucleodash.geography.service;
+
+public class LocalitiesServiceImpl {
 }

@@ -1,4 +1,4 @@
 package com.nucleodash.geography.service;
 
-public class DederalDistrictServiceImpl {
+public class FederalDistrictServiceImpl {
 }

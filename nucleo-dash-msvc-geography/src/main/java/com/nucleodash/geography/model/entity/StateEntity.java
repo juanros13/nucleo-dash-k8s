@@ -1,2 +1,4 @@
-package com.nucleodash.geography.model.entity;public class StateEntity {
+package com.nucleodash.geography.model.entity;
+
+public class StateEntity {
 }
